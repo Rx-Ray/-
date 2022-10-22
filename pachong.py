@@ -3,6 +3,7 @@ import urllib
 import requests as req
 import re
 import time
+import tkinter.messagebox as tk
 
 r=req.get("https://www.bkjx.sdu.edu.cn/sanji_list.jsp?urltype=tree.TreeTempUrl&wbtreeid=1010")#获取页面
 
@@ -36,5 +37,19 @@ if (ju=="1"):
         print(date[i])
         i+=1
         print("")
+if (ju=="2"):
+    old=k[0].find(name="a").string
+    while 1:
+        r=req.get("https://www.bkjx.sdu.edu.cn/sanji_list.jsp?urltype=tree.TreeTempUrl&wbtreeid=1010")#获取页面
+
+        soup =b.BeautifulSoup(r.text,"html.parser")#截取数据
+        k=soup.select(".leftNews3")
+        new=k[0].find(name="a").string
+        if new!=old:
+            tk.showinfo("提示","您有一条新消息")
+            old=new
+        else:
+            pass
+
 input()
 
